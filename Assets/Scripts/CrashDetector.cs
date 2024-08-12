@@ -8,14 +8,13 @@ public class CrashDetector : MonoBehaviour
     [SerializeField] float invokeDelay=2f;
     [SerializeField] ParticleSystem crashParticle;
     
-   void OnTriggerStay2D(Collider2D other)
+   void OnCollisionEnter2D(Collision2D other)
     {
-        
-        if(other.tag=="Ground")
-        {
-            crashParticle.Play();
-            Invoke("ReloadScene", invokeDelay);  
-        }
+                if(other.gameObject.tag=="Ground")
+                {
+                    crashParticle.Play();
+                    Invoke("ReloadScene", invokeDelay);  
+                }
     }
     void ReloadScene()
     {
