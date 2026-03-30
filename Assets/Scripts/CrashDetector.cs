@@ -10,10 +10,12 @@ public class CrashDetector : MonoBehaviour
     [SerializeField] AudioClip crashSFX;
     AudioSource audioSource;
     bool crashed=true;
+    PlayerController playerController;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        playerController = FindObjectOfType<PlayerController>();
     }
     
    void OnCollisionEnter2D(Collision2D other)
@@ -23,8 +25,8 @@ public class CrashDetector : MonoBehaviour
                 crashParticle.Play();
                 audioSource.PlayOneShot(crashSFX);
                 //crashSFX.Play();
-                FindObjectOfType<PlayerController>().DisableControls();
-                crashed=false;
+                playerController.DisableControls();
+                //crashed=false;
                 Invoke("ReloadScene", invokeDelay);  
             }
     }
@@ -35,3 +37,5 @@ public class CrashDetector : MonoBehaviour
     }
 
 }
+
+
